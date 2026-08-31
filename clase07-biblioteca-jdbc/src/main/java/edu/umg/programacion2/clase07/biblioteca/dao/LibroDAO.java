@@ -22,7 +22,7 @@ public class LibroDAO {
 
     private static final String URL = "jdbc:mysql://localhost:3306/prog2_db?useSSL=false&serverTimezone=UTC";
     private static final String USUARIO = "root";
-    private static final String PASSWORD = "tito13";
+    private static final String PASSWORD = "";
 
     public int crear(Libro libro) throws SQLException {
         String sql = "INSERT INTO libros (titulo, autor, isbn) VALUES (?, ?, ?)";
