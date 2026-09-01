@@ -60,13 +60,17 @@ public class Main {
                     reporteConteoPorTitulo();
                     break;
                 case 8:
+                	contarPrestamos();
+                	break;
+                	
+                case 9:
                     System.out.println("Hasta luego.");
                     break;
                 default:
                     System.out.println("Opcion invalida. Intenta de nuevo.");
             }
             System.out.println();
-        } while (opcion != 8);
+        } while (opcion != 9);
 
         teclado.close();
     }
@@ -80,7 +84,8 @@ public class Main {
         System.out.println("5. Ver prestamos activos (con titulo del libro)");
         System.out.println("6. Reporte: libros nunca prestados");
         System.out.println("7. Reporte: conteo de prestamos activos por titulo");
-        System.out.println("8. Salir");
+        System.out.println("8. Contar prestamos por libros");
+        System.out.println("9. Salir");
         System.out.print("Elige una opcion: ");
     }
 
@@ -200,4 +205,18 @@ public class Main {
         teclado.nextLine();
         return valor;
     }
+    private static void contarPrestamos() {
+        System.out.print("Introduce el ID del libro que deseas consultar: ");
+        int idBuscado = leerEntero();
+
+        try {
+            int totalPrestamos = prestamoDAO.contarPrestamoPorLibro(idBuscado);
+            
+            System.out.println("El libro con ID " + idBuscado + " se ha prestado " + totalPrestamos + " veces en total.");
+            
+        } catch (SQLException e) {
+            System.err.println("Error al contar los préstamos: " + e.getMessage());
+        }
+    }
+
 }
