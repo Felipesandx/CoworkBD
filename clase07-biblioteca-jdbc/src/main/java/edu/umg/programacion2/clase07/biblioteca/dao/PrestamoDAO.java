@@ -28,6 +28,7 @@ public class PrestamoDAO {
     private static final String USUARIO = "root";
     private static final String PASSWORD = " ";
 
+
     // Repaso: INSERT con generated keys, igual que EstudianteDAO.crear().
     public int registrarPrestamo(Prestamo prestamo) throws SQLException {
         String sql = "INSERT INTO prestamos (libro_id, nombre_estudiante, fecha_prestamo, fecha_devolucion) "
@@ -111,7 +112,6 @@ public class PrestamoDAO {
 
             while (data.next()) {
                 prestamoDetalle.add(mapearFila(data));
-                System.out.println(prestamoDetalle);
             }
         }
         
