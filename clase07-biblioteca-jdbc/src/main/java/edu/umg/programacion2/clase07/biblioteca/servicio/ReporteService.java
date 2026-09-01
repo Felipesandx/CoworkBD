@@ -74,6 +74,19 @@ public class ReporteService {
     public Map<String, Integer> contarPrestamosActivosPorTitulo() throws SQLException {
         Map<String, Integer> conteo = new HashMap<>();
         List<PrestamoDetalle> activos = prestamoDAO.listarPrestamosActivosConLibro();
+        for(PrestamoDetalle detalle : activos) {
+        	String titulo = detalle.getTituloLibro();
+        	if(conteo.containsKey(titulo)) {
+        		conteo.put(titulo, conteo.get(titulo) + 1);
+        		
+        		}else {
+        			conteo.put(titulo, 1);
+        		}
+        	
+        	
+        	
+        }
+        
         // TODO: recorrer "activos" y llenar "conteo" usando getTituloLibro() como llave.
 
         return conteo;
