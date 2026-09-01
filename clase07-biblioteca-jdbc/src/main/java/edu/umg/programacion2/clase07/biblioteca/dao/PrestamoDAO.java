@@ -26,7 +26,7 @@ public class PrestamoDAO {
 
     private static final String URL = "jdbc:mysql://localhost:3306/prog2_db?useSSL=false&serverTimezone=UTC";
     private static final String USUARIO = "root";
-    private static final String PASSWORD = "SomewhereIBelong";
+    private static final String PASSWORD = System.getenv().getOrDefault("DB_PASSWORD", "");
 
     // Repaso: INSERT con generated keys, igual que EstudianteDAO.crear().
     public int registrarPrestamo(Prestamo prestamo) throws SQLException {
@@ -119,22 +119,22 @@ public class PrestamoDAO {
         return prestamoDetalle;
     }
     
-    public int contarPrestamoPorLibro(int libroId) throws SQLException{
-    	String sql = "SELECT COUNT(*) FROM prestamos WHERE libro_id = ?";
-    	int total = 0;
-    	
-    	try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
-    		 PreparedStatement statement = conexion.prepareStatement(sql)){
-    		
-    		statement.setInt(1,libroId);
-    			
-    		try(ResultSet data = statement.executeQuery()){
-    			if(data.next()) {
-    				total = data.getInt(1);
-    			}
-    		}	
-    	}
-    	return total;
+    public int contarPrestamoPorLibro(int libroId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM prestamos WHERE libro_id = ?";
+        int total = 0;
+
+        try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+             PreparedStatement statement = conexion.prepareStatement(sql)) {
+
+            statement.setInt(1, libroId);
+
+            try (ResultSet data = statement.executeQuery()) {
+                if (data.next()) {
+                    total = data.getInt(1);
+                }
+            }
+        }
+        return total;
     }
 
     private PrestamoDetalle mapearFila(ResultSet resultado) throws SQLException {

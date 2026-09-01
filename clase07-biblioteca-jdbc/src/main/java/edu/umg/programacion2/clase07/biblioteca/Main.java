@@ -60,9 +60,8 @@ public class Main {
                     reporteConteoPorTitulo();
                     break;
                 case 8:
-                	contarPrestamos();
-                	break;
-                	
+                    contarPrestamos();
+                    break;
                 case 9:
                     System.out.println("Hasta luego.");
                     break;
