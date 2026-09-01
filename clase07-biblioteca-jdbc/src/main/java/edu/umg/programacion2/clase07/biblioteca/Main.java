@@ -62,7 +62,6 @@ public class Main {
                 case 8:
                 	contarPrestamos();
                 	break;
-                	
                 case 9:
                     System.out.println("Hasta luego.");
                     break;
