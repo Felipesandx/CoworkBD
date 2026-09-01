@@ -179,7 +179,7 @@ public class Main {
 
     private static void reporteLibrosNuncaPrestados() {
         try {
-            Set<Libro> libros = reporteService.librosNuncaPrestados();
+            Set<Libro> libros = reporteService.librosNuncaPrestados(libroDAO, prestamoDAO);
             System.out.println(libros);
         } catch (SQLException e) {
             System.err.println("Error al generar el reporte: " + e.getMessage());

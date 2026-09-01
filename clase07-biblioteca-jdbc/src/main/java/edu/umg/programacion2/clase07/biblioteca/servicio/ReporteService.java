@@ -53,9 +53,22 @@ public class ReporteService {
      * tu grupo si "nunca prestado" deberia significar "sin historial" en vez
      * de "sin prestamo activo", y ajusta la consulta si hace falta.
      */
-    public Set<Libro> librosNuncaPrestados() throws SQLException {
+    public Set<Libro> librosNuncaPrestados(LibroDAO libroDAO, PrestamoDAO prestamoDAO) throws SQLException {
+        Set<Libro> todosLosLibros = new HashSet<>(libroDAO.listarTodos());
+
+        List<PrestamoDetalle> prestamosActivos = prestamoDAO.listarPrestamosActivosConLibro();
+
+        Set<String> titulosConPrestamoActivo = new HashSet<>();
+        for (PrestamoDetalle detalle : prestamosActivos) {
+            titulosConPrestamoActivo.add(detalle.getTituloLibro());
+        }
+
         Set<Libro> resultado = new HashSet<>();
-        // TODO: usar libroDAO y prestamoDAO para llenar "resultado" segun las pistas de arriba.
+        for (Libro libro : todosLosLibros) {
+            if (!titulosConPrestamoActivo.contains(libro.getTitulo())) {
+                resultado.add(libro);
+            }
+        }
 
         return resultado;
     }
